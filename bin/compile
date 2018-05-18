@@ -18,13 +18,13 @@ bp_dir=$(cd $(dirname $0); cd ..; pwd)
 
 export BPLOG_PREFIX="buildpack.php"
 export BUILDPACK_LOG_FILE=${BUILDPACK_LOG_FILE:-/dev/null}
-# odbc unixodbc
-echo '-----> Installing unix ODBC'
-curl http://www.unixodbc.org/unixODBC-2.3.4.tar.gz | tar xvz --directory $BUILD_DIR
-$BUILD_DIR/unixODBC-2.3.4/install-sh -t $BUILD_DIR
+
 
 # convenience functions
 source $bp_dir/bin/util/common.sh
+
+# custom extenction
+source $bp_dir/bin/custom_ext.sh
 
 # stdlib
 source /dev/stdin <<< "$(curl_retry_on_18 --silent https://lang-common.s3.amazonaws.com/buildpack-stdlib/v8/stdlib.sh)"
